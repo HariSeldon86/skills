@@ -26,7 +26,7 @@ Build a Simulink model that simulates a cruise control system. The vehicle dynam
 
 ```bash
 # Clone the repository
-git clone https://github.com/matlab/skills.git
+git clone https://github.com/HariSeldon86/skills.git
 
 # Copy all skills to your skills directory (claude, vscode, antigravity, etc.)
 cp -r skills/skills/* YOUR_PROJECT/.claude/skills/
