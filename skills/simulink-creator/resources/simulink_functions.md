@@ -96,7 +96,7 @@
     - [Create Large-Scale Model Components](#create-large-scale-model-components)
       - [Integrate Components from External Tools](#integrate-components-from-external-tools)
       - [Integrate External Code into Simulink](#integrate-external-code-into-simulink)
-  - [Reference](#reference)
+  - [References](#references)
 
 ## Simulink Environment Fundamentals
 ### Programmatic Model Editing
@@ -1284,8 +1284,5 @@ Name|Description
 [Simulink.SFunctionBuilder.update](https://uk.mathworks.com/help/simulink/slref/simulink.sfunctionbuilder.update.html) | Update attributes for input port, output port, or parameter of S-Function Builder block _(Since R2022a)_  
 [Symbol](https://uk.mathworks.com/help/simulink/slref/simulink.cfunctionblock.symbol.html) | C Function block data symbol  
 [SymbolSpec](https://uk.mathworks.com/help/simulink/slref/simulink.cfunctionblock.symbolspec.html) | Query and configure C Function block data symbols  
-## Reference
+## References
 * [Simulink Functions](https://uk.mathworks.com/help/simulink/referencelist.html?type=function&listtype=cat&category=index&blocktype=all&capability=&startrelease=&endrelease=)
----
-© 1994-2026 The MathWorks, Inc.
-United Kingdom

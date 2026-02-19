@@ -63,7 +63,7 @@
     - [Create Large-Scale Model Components](#create-large-scale-model-components)
       - [Integrate Components from External Tools](#integrate-components-from-external-tools)
       - [Integrate External Code into Simulink](#integrate-external-code-into-simulink)
-  - [Reference](#reference)
+  - [References](#references)
 
 ## Simulink Environment Fundamentals
 ### Block Libraries
@@ -790,8 +790,5 @@ Name|Description
 [Python Code](https://uk.mathworks.com/help/simulink/ref_extras/pythoncode.html) | Integrate native Python code into a Simulink model _(Since R2025a)_  
 [S-Function](https://uk.mathworks.com/help/simulink/slref/sfunction.html) | Include S-function in model  
 [S-Function Builder](https://uk.mathworks.com/help/simulink/slref/sfunctionbuilder.html) | Integrate C or C++ code to create S-functions  
-## Reference
+## References
 * [Simulink Blocks](https://uk.mathworks.com/help/simulink/referencelist.html?type=block&listtype=cat&category=index&blocktype=all&capability=&startrelease=&endrelease=)
----
-© 1994-2026 The MathWorks, Inc.
-United Kingdom
