@@ -7,7 +7,7 @@ Skills are specialized instruction sets that extend the capabilities of coding a
 
 ### Simulink Creator
 
-**Name**: `simulink-creator`
+**Name**: [simulink-creator](skills/simulink-creator)
 
 **Description**: Simulink Creator is a tool that allows users to create and edit Simulink models programmatically using MATLAB code. It provides a set of functions and APIs that enable users to build Simulink models, add blocks, connect them, and configure their properties through code. This skill is useful for automating the creation of Simulink models, generating models from data or specifications, and integrating Simulink with other tools and workflows.
 
