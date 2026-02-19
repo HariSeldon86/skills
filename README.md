@@ -17,7 +17,7 @@ Skills are specialized instruction sets that extend the capabilities of coding a
 Build a Simulink model that simulates a cruise control system. The vehicle dynamics are modeled as a transfer function 10 / (s^2 + 3s). Use a PID controller with P=2, I=0.5, D=0.1. Include a Step reference at t=1s with amplitude 25 (target speed in m/s), log the output to workspace, and display both the reference and output on the same Scope.
 ```
 
-**License**: MIT License
+**License**: [MIT License](LICENSE)
 
 
 ## Installation & Usage
