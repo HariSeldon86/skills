@@ -63,6 +63,8 @@
     - [Create Large-Scale Model Components](#create-large-scale-model-components)
       - [Integrate Components from External Tools](#integrate-components-from-external-tools)
       - [Integrate External Code into Simulink](#integrate-external-code-into-simulink)
+  - [Extras](#extras)
+    - [Flip Flops](#flip-flops)
   - [References](#references)
 
 ## Simulink Environment Fundamentals
@@ -790,5 +792,13 @@ Name|Description
 [Python Code](https://uk.mathworks.com/help/simulink/ref_extras/pythoncode.html) | Integrate native Python code into a Simulink model _(Since R2025a)_  
 [S-Function](https://uk.mathworks.com/help/simulink/slref/sfunction.html) | Include S-function in model  
 [S-Function Builder](https://uk.mathworks.com/help/simulink/slref/sfunctionbuilder.html) | Integrate C or C++ code to create S-functions  
+## Extras
+### Flip Flops
+Name|Description
+---|---
+[D Flip-Flop](https://uk.mathworks.com/help/simulink/ref_extras/dflipflop.html) | Model a positive-edge-triggered enabled D flip-flop
+[D Latch](https://uk.mathworks.com/help/simulink/ref_extras/dlatch.html) | Model an enabled D Latch flip-flop
+[J-K Flip-Flop](https://uk.mathworks.com/help/simulink/ref_extras/jkflipflop.html) | Model a negative-edge-triggered J-K flip-flop
+[S-R Flip-Flop](https://uk.mathworks.com/help/simulink/ref_extras/srflipflop.html) | Model an S-R flip-flop
 ## References
 * [Simulink Blocks](https://uk.mathworks.com/help/simulink/referencelist.html?type=block&listtype=cat&category=index&blocktype=all&capability=&startrelease=&endrelease=)
