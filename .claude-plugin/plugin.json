@@ -1,0 +1,31 @@
+{
+    "name": "hariseldon86-skills",
+    "version": "1.0.0",
+    "description": "A collection of Agent Skills for several scopes in software development, computer science and engineering.",
+    "author": {
+        "name": "Alessandro Renna",
+        "url": "https://github.com/HariSeldon86/skills"
+    },
+    "homepage": "https://github.com/HariSeldon86/skills",
+    "repository": "https://github.com/HariSeldon86/skills",
+    "license": "MIT License",
+    "keywords": [
+        "matlab",
+        "simulink",
+        "mbd",
+        "ci/cd",
+        "testing",
+        "performance",
+        "optimization",
+        "code-generation",
+        "scientific-computing",
+        "data-analysis",
+        "programming",
+        "html",
+        "javascript",
+        "web",
+        "interactive",
+        "gui",
+        "webapp"
+    ]
+}

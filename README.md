@@ -1,5 +1,5 @@
 # Skills for Coding Agents
-My collection of [Agent Skills](https://agentskills.io/home) for several scopes.
+A collection of [Agent Skills](https://agentskills.io/home) for several scopes in software development, computer science and engineering.
 
 Skills are specialized instruction sets that extend the capabilities of coding agents for specific tasks, automatically activating when needed.
 
@@ -22,7 +22,25 @@ Build a Simulink model that simulates a cruise control system. The vehicle dynam
 
 ## Installation & Usage
 
+### Claude Code (CLI)
+
+**Recommended**: Install all agent skills using the plugin marketplace:
+
+```bash
+# (Step 1) Add the marketplace to Claude Code
+/plugin marketplace add HariSeldon86/skills
+
+# (Step 2) Install all the MATLAB Agent Skills
+/plugin install hariseldon86-skills@hariseldon86-skills
+```
+
+This installs all the skills in one command. Skills automatically activate when Claude detects relevant tasks.
+
 ### Manual installation
+
+Agent Skills are supported by **Claude Code**, **Claude.ai**, **Cursor**, **VS Code**, **GitHub Copilot**, **Gemini CLI**, **Antigravity**, **OpenAI Codex**,  and many more.
+
+Integration and connection may vary by plan and platform. Generally you should:
 
 ```bash
 # Clone the repository
