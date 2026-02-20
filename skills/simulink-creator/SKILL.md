@@ -8,13 +8,7 @@ license: MIT License
 
 ## Overview
 
-This skill generates complete, runnable MATLAB `.m` scripts that build Simulink models programmatically. Scripts must cover the full lifecycle: creating the model, adding and configuring blocks, connecting signals, arranging layout, and saving. If MATLAB is available, validate the script using `MCP` or `scripts/run_matlab_command.*`.
-
----
-
-## Prerequisites
-- Setup python tools by running `simulink-creator/setup.sh` or `simulink-creator/setup.bat` to create a virtual environment `simulink-creator/.venv` and install dependencies
-- Run `simulink-creator/scripts/web_crawler.py` from the virtual environment `simulink-creator/.venv` to get the latest documentation for the Simulink blocks and functions
+This skill generates complete, runnable MATLAB `.m` scripts that build Simulink models programmatically. Scripts must cover the full lifecycle: creating the model, adding and configuring blocks, connecting signals, arranging layout, and saving. If MATLAB is available, validate the script using `MATLAB MCP` or from terminal with `matlab -batch "commands"`.
 
 ---
 
@@ -23,12 +17,12 @@ This skill generates complete, runnable MATLAB `.m` scripts that build Simulink 
 For every Simulink model request:
 
 1. **Understand the model** — identify inputs, outputs, processing logic, and domain (control, signal processing, physical modeling, etc.)
-2. **Identify required blocks** — read `references/simulink_blocks.md` to confirm block names, descriptions, and doc links; read `references/simulink_functions.md` for API functions
-3. **Retrieve detailed docs** — use `scripts/web_crawler.py` with the doc links from the resource files to confirm library paths, port counts, and exact `set_param` key names
-4. **Generate a complete `.m` script** — not snippets; a full runnable file following the structure below
-5. **Explain the code** — briefly describe blocks used, closed-loop architecture, and how to run
-6. **Validate if MATLAB available** — run via `MCP` or `scripts/run_matlab_command.*`; iterate on errors
-
+2. **Iterate with user** — ask one clarifying question if the request is ambiguous (e.g., "What is the plant transfer function?" or "What signals should be logged?")
+3. **Identify required blocks** — read `references/simulink_blocks.md` to confirm block names, descriptions, and doc links; read `references/simulink_functions.md` for API functions
+4. **Retrieve detailed docs** — use **web search** with the doc links from the resource files to confirm library paths, port counts, and exact `set_param` key names
+5. **Generate a complete `.m` script** — not snippets; a full runnable file following the structure below
+6. **Validate and iterate** — if MATLAB available, verify the generated script via `MATLAB MCP` or from terminal with `matlab -batch "commands"`, and iterates until the model simulates successfully.
+7. **Explain the code** — briefly describe blocks used, closed-loop architecture, and how to run
 
 ---
 
@@ -84,11 +78,16 @@ disp(['Model "' modelName '" created and saved successfully.']);
 
 %% 8. Simulate
 sim(modelName);
+disp(['Model "' modelName '" has run successfully.']);
 ```
 
 ---
 
 ## API Reference
+
+Always look up `references/simulink_functions.md` to confirm function signatures and retrieve doc links for detailed usage.
+
+If details are not enough, perform a **web search** on the function. 
 
 | Function | Purpose |
 |---|---|
@@ -106,13 +105,13 @@ sim(modelName);
 | `Simulink.BlockDiagram.arrangeSystem('path')` | Arrange the blocks in the model level |
 | `Simulink.findBlocksOfType(modelName,'Subsystem')` | Find all blocks of a certain type |
 
-Always look up `references/simulink_functions.md` to confirm function signatures and retrieve doc links for detailed usage.
-
 ---
 
 ## Block Reference
 
-Always look up `references/simulink_blocks.md` before using a block to confirm name, description, and the doc link. Use `scripts/web_crawler.py` on that link to get the library path, port count, and exact `set_param` key names.
+Always look up `references/simulink_blocks.md` before using a block to confirm name, description, and the doc link.
+
+Perform **web search** on that link to get the library path, port count, and exact `set_param` key names, if required.
 
 If a block is not found in the resource file, use general Simulink knowledge and add:
 ```matlab
@@ -161,17 +160,19 @@ If a block is not found in the resource file, use general Simulink knowledge and
 ## Code Patterns
 
 ### Adding and Configuring Blocks
+
 ```matlab
 add_block('simulink/Sources/Sine Wave', [modelName '/SineInput']);
 add_block('simulink/Math Operations/Gain', [modelName '/Gain1']);
 add_block('simulink/Sinks/Scope', [modelName '/Scope']);
 
-% Use exact key from block doc's "Programmatic Use" section
+% Use exact key from block documentation
 set_param([modelName '/Gain1'], 'Gain', '5');
 set_param([modelName '/SineInput'], 'Frequency', '2*pi');
 ```
 
 ### Connecting Blocks
+
 ```matlab
 % add_line(model, 'Source/OutPort#', 'Destination/InPort#')
 add_line(modelName, 'SineInput/1', 'Gain1/1');
@@ -183,6 +184,7 @@ set_param(h, 'Name', 'gainedSignal');
 ```
 
 ### Layout
+
 ```matlab
 % Auto-arrange top level
 Simulink.BlockDiagram.arrangeSystem(modelName);
@@ -200,6 +202,7 @@ set_param([modelName '/Scope'],     'Position', [450, 100, 500, 130]);
 ```
 
 ### Simulation Parameters
+
 ```matlab
 set_param(modelName, 'StopTime',   '10');
 set_param(modelName, 'Solver',     'ode45');
@@ -208,8 +211,11 @@ set_param(modelName, 'MaxStep',    '0.01');
 ```
 
 ### Subsystems
+
 ```matlab
 add_block('simulink/Ports & Subsystems/Subsystem', [modelName '/Controller']);
+
+% Clear default inport/outport
 Simulink.SubSystem.deleteContents([modelName '/Controller']);
 
 add_block('simulink/Ports & Subsystems/In1',  [modelName '/Controller/In1']);
@@ -218,39 +224,6 @@ add_block('simulink/Ports & Subsystems/Out1', [modelName '/Controller/Out1']);
 
 add_line([modelName '/Controller'], 'In1/1',       'InnerGain/1');
 add_line([modelName '/Controller'], 'InnerGain/1', 'Out1/1');
-```
-
----
-
-## Domain Patterns
-
-### Closed-Loop Control (PID + Plant)
-```matlab
-add_block('simulink/Sources/Step',              [mdl '/Ref']);
-add_block('simulink/Math Operations/Sum',        [mdl '/ErrorSum']);
-add_block('simulink/Continuous/PID Controller',  [mdl '/PID']);
-add_block('simulink/Continuous/Transfer Fcn',    [mdl '/Plant']);
-add_block('simulink/Sinks/Scope',                [mdl '/Scope']);
-
-set_param([mdl '/ErrorSum'], 'Inputs', '+-');
-
-add_line(mdl, 'Ref/1',      'ErrorSum/1');
-add_line(mdl, 'ErrorSum/1', 'PID/1');
-add_line(mdl, 'PID/1',      'Plant/1');
-add_line(mdl, 'Plant/1',    'Scope/1');
-add_line(mdl, 'Plant/1',    'ErrorSum/2');  % feedback
-```
-
-### Discrete Filter
-```matlab
-add_block('simulink/Sources/Sine Wave',            [mdl '/Input']);
-add_block('simulink/Discrete/Discrete Transfer Fcn', [mdl '/Filter']);
-add_block('simulink/Sinks/Scope',                  [mdl '/Output']);
-
-% num/den defined as workspace variables before running
-set_param([mdl '/Filter'], 'Numerator', 'num', 'Denominator', 'den');
-add_line(mdl, 'Input/1', 'Filter/1');
-add_line(mdl, 'Filter/1', 'Output/1');
 ```
 
 ### Data Logging
@@ -273,46 +246,6 @@ set_param([mdl '/Logger'], 'VariableName', 'simOut', 'SaveFormat', 'Array');
 | "Model already exists" error | Always call `close_system(modelName, 0)` before `new_system` |
 | Wrong connection direction | Always `Source/outport → Destination/inport` |
 | Split signals | Call `add_line` twice from the same output port |
-
----
-
-## Scripts & References
-
-### References
-```
-references/simulink_blocks.md    — block names, descriptions, doc links
-references/simulink_functions.md — API function names, descriptions, doc links
-```
-
-### Scripts
-
-#### Web Crawler (for doc retrieval)
-```
-scripts/web_crawler.py
-```
-
-**Setup (run once):**
-```bash
-# Linux/Mac
-bash setup.sh
-
-# Windows
-setup.bat
-```
-
-**Usage:**
-```bash
-# Linux/Mac
-.venv/bin/python scripts/web_crawler.py "https://uk.mathworks.com/help/simulink/slref/abs.html"
-
-# Windows
-.venv\Scripts\python scripts/web_crawler.py "https://uk.mathworks.com/help/simulink/slref/abs.html"
-```
-
-#### Run Matlab Command (for validation)
-Run the generated script using any available method:
-1. `MCP` that can execute MATLAB commands
-2. `scripts/run_matlab_command.sh` (Linux/Mac) or `scripts/run_matlab_command.bat` (Windows)
 
 ---
 
