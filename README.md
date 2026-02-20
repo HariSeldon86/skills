@@ -28,9 +28,9 @@ Build a Simulink model that simulates a cruise control system. The vehicle dynam
 
 ```bash
 # (Step 1) Add the marketplace to Claude Code
-/plugin marketplace add HariSeldon86/skills
+/plugin marketplace add hariseldon86/skills
 
-# (Step 2) Install all the MATLAB Agent Skills
+# (Step 2) Install all Agent Skills
 /plugin install hariseldon86-skills@hariseldon86-skills
 ```
 

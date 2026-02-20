@@ -4,10 +4,10 @@
     "description": "A collection of Agent Skills for several scopes in software development, computer science and engineering.",
     "author": {
         "name": "Alessandro Renna",
-        "url": "https://github.com/HariSeldon86/skills"
+        "url": "https://github.com/hariseldon86/skills"
     },
-    "homepage": "https://github.com/HariSeldon86/skills",
-    "repository": "https://github.com/HariSeldon86/skills",
+    "homepage": "https://github.com/hariseldon86/skills",
+    "repository": "https://github.com/hariseldon86/skills",
     "license": "MIT License",
     "keywords": [
         "matlab",
