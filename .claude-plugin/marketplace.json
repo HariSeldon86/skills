@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "A collection of Agent Skills for several scopes in software development, computer science and engineering.",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "hariseldon86-skills",
       "source": "./",
       "description": "A collection of agent skills for several scopes",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "Alessandro Renna"
       },
