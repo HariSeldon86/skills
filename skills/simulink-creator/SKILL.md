@@ -12,6 +12,12 @@ This skill generates complete, runnable MATLAB `.m` scripts that build Simulink 
 
 ---
 
+## Prerequisites
+- Setup python tools by running `simulink-creator/setup.sh` or `simulink-creator/setup.bat` to create a virtual environment `simulink-creator/.venv` and install dependencies
+- Run `simulink-creator/scripts/web_crawler.py` from the virtual environment `simulink-creator/.venv` to get the latest documentation for the Simulink blocks and functions
+
+---
+
 ## Workflow
 
 For every Simulink model request:
@@ -22,6 +28,7 @@ For every Simulink model request:
 4. **Generate a complete `.m` script** — not snippets; a full runnable file following the structure below
 5. **Explain the code** — briefly describe blocks used, closed-loop architecture, and how to run
 6. **Validate if MATLAB available** — run via `MCP` or `scripts/run_matlab_command.*`; iterate on errors
+
 
 ---
 
@@ -287,17 +294,19 @@ scripts/web_crawler.py
 **Setup (run once):**
 ```bash
 # Linux/Mac
-python3 -m venv venv && source venv/bin/activate
-pip install crawl4ai && crawl4ai-setup
+bash setup.sh
 
 # Windows
-python -m venv venv && venv\Scripts\activate
-pip install crawl4ai && crawl4ai-setup
+setup.bat
 ```
 
 **Usage:**
 ```bash
-python scripts/web_crawler.py "https://uk.mathworks.com/help/simulink/slref/abs.html"
+# Linux/Mac
+.venv/bin/python scripts/web_crawler.py "https://uk.mathworks.com/help/simulink/slref/abs.html"
+
+# Windows
+.venv\Scripts\python scripts/web_crawler.py "https://uk.mathworks.com/help/simulink/slref/abs.html"
 ```
 
 #### Run Matlab Command (for validation)
