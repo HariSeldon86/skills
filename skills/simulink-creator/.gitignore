@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv
+
+# Editor Files
+.vscode/
+.idea/
+
+# Node modules (if any future tooling)
+node_modules/
+
+# Environment file
+.env
+
+# Temporary files
+*.tmp
+.cache/
